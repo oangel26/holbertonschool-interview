@@ -3,14 +3,6 @@
 Module that prints pascal triagle
 """
 
-def print_triangle(triangle):
-    """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
-
-
 def pascal_triangle(n):
     """
     Method which returns a list of list of integers representing
@@ -33,7 +25,3 @@ def pascal_triangle(n):
                 lista.append(1)
         triangle.append(lista)
     return triangle
-
-
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
