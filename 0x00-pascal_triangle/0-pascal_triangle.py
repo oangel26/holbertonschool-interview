@@ -3,6 +3,7 @@
 Module that prints pascal triagle
 """
 
+
 def pascal_triangle(n):
     """
     Method which returns a list of list of integers representing
