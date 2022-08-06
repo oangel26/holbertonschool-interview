@@ -11,22 +11,21 @@ def canUnlockAll(boxes):
     if boxes is None or len(boxes) == 0:
         return False
 
-    status = ["T"]
+    keys_dict = {0: True}
+    for i in range(1, len(boxes)):
+        keys_dict[i] = False
 
-    for box in range(1, len(boxes)):
-        status.append("F")
+    for k, v in keys_dict.items():
+        if (v == True):
+            for key in boxes[k]:
+                keys_dict[key] = True
 
-    for box in range(0, len(boxes)):
-        if (status[box] == "T" or box == 0):
-            for key in boxes[box]:
-                if int(key) < len(boxes) and status[key] == "F":
-                    for k in boxes[key]:
-                        if k < len(boxes):
-                            status[k] = "T"
-                if key < len(boxes):
-                    status[key] = "T"
+    for k, v in reversed(keys_dict.items()):
+        if (v == True):
+            for key in boxes[k]:
+                keys_dict[key] = True
 
-    if "F" in status:
+    if (False in keys_dict.values()):
         return False
     return True
 
