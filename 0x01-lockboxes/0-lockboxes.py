@@ -19,7 +19,7 @@ def canUnlockAll(boxes):
             for key in boxes[k]:
                 keys_dict[key] = True
 
-        for k, v in reversed(keys_dict.items()):
+        for k, v in keys_dict.items():
             if (v == True):
                 for key in boxes[k]:
                     keys_dict[key] = True
