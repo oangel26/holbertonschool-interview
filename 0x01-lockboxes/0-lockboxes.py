@@ -15,17 +15,13 @@ def canUnlockAll(boxes):
         keys_dict[i] = False
 
     while (True):
+        dict1 = keys_dict.copy()
         for k, v in keys_dict.items():
             if (v == True):
                 for key in boxes[k]:
                     keys_dict[key] = True
-            dict1 = keys_dict.copy()
 
-            for k, v in keys_dict.items():
-                if (v == True):
-                    for key in boxes[k]:
-                        keys_dict[key] = True
-            dict2 = keys_dict.copy()
+        dict2 = keys_dict.copy()
 
         if (dict1 == dict2):
             break
