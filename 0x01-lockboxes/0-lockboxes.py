@@ -4,14 +4,13 @@ You have n number of locked boxes in front of you.
 Each box is numbered sequentially from 0 to n - 1 and
 each box may contain keys to the other boxes.
 """
-
-
 def canUnlockAll(boxes):
     """ method that determines if all the boxes can be opened."""
     if boxes is None or len(boxes) == 0:
         return False
 
     keys_dict = {0: True}
+
     for i in range(1, len(boxes)):
         keys_dict[i] = False
 
@@ -20,10 +19,10 @@ def canUnlockAll(boxes):
             for key in boxes[k]:
                 keys_dict[key] = True
 
-    for k, v in reversed(keys_dict.items()):
-        if (v == True):
-            for key in boxes[k]:
-                keys_dict[key] = True
+        for k, v in reversed(keys_dict.items()):
+            if (v == True):
+                for key in boxes[k]:
+                    keys_dict[key] = True
 
     if (False in keys_dict.values()):
         return False
