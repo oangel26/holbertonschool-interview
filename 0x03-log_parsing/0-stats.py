@@ -21,10 +21,10 @@ try:
             status_dict[chunk[7]] = 1
         if counter % 10 == 0:
             print(f"File size: {file_size}")
-            for k, v in status_dict.items():
+            for k, v in sorted(status_dict.items()):
                 print(f"{k}: {v}")
 except KeyboardInterrupt:
     print(f"File size: {file_size}")
-    for k, v in status_dict.items():
+    for k, v in sorted(status_dict.items()):
         print(f"{k}: {v}")
         sys.exit(0)
