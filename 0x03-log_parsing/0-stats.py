@@ -40,6 +40,8 @@ try:
         if counter % 10 == 0:
             print_stats(file_size, status_dict)
 
+    print_stats(file_size, status_dict)
+
 except KeyboardInterrupt:
     print_stats(file_size, status_dict)
     raise
