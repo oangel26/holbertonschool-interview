@@ -1,8 +1,8 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
 """
 Python script that reads stdin line by line and computes metrics.
 """
-from sys import stdin
+import sys
 
 
 def printstats(file_size, status_codes):
@@ -23,7 +23,7 @@ status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
                 "403": 0, "404": 0, "405": 0, "500": 0}
 
 try:
-    for line in stdin:
+    for line in sys.stdin:
         line_num += 1
         split_line = line.split()
 
