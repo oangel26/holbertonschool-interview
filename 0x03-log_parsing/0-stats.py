@@ -13,7 +13,8 @@ def print_stats(file_size: int, status_dict: dict) -> None:
     """ Function which prints stats """
     print(f"File size: {file_size}")
     for s_code, s_number in sorted(status_dict.items()):
-        print(f"{s_code}: {str(s_number)}")
+        if int(s_code) > 0:
+            print(f"{s_code}: {str(s_number)}")
 
 
 counter = 0
@@ -29,6 +30,8 @@ try:
 
         if len(chunk) > 2 and chunk[-2].isnumeric():
             status_code = chunk[-2]
+        else:
+            status_code = 0
 
         # Creates status dictionary
         if (status_code in status_dict):
