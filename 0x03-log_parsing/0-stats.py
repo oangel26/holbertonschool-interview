@@ -1,47 +1,48 @@
-#!/usr/bin/python3
+ #!/usr/bin/python3
 """
-Log parsing
+Python script that reads stdin line by line and computes metrics.
 """
+from sys import stdin
 
 
-import sys
-import json
-import time
+def printstats(file_size, status_codes):
+    """
+    This prints statistics at the beginning and every 10 lines
+    This will also be called on a Keyboard interruption
+    """
+    print("File size: " + str(file_size))
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print(code + ": " + str(status_codes[code]))
 
 
-def print_stats(file_size: int, status_dict: dict) -> None:
-    """ Function which prints stats """
-    print(f"File size: {file_size}")
-    for s_code, s_number in sorted(status_dict.items()):
-        if int(s_code) > 0:
-            print(f"{s_code}: {str(s_number)}")
-
-
-counter = 0
-status_dict = {}
+line_num = 0
 file_size = 0
+status_code = 0
+status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
+                "403": 0, "404": 0, "405": 0, "500": 0}
+
 try:
-    for line in sys.stdin:
-        counter += 1
-        chunk = line.split()
+    for line in stdin:
+        line_num += 1
+        split_line = line.split()
 
-        if len(chunk) > 1:
-            file_size += int(chunk[-1])
+        if len(split_line) > 1:
+            file_size += int(split_line[-1])
 
-        if len(chunk) > 2 and chunk[-2].isnumeric():
-            status_code = chunk[-2]
+        if len(split_line) > 2 and split_line[-2].isnumeric():
+            status_code = split_line[-2]
         else:
             status_code = 0
 
-        # Creates status dictionary
-        if (status_code in status_dict):
-            status_dict[status_code] += 1
-        else:
-            status_dict[status_code] = 1
+        if status_code in status_codes.keys():
+            status_codes[status_code] += 1
 
-        if counter % 10 == 0:
-            print_stats(file_size, status_dict)
+        if line_num % 10 == 0:
+            printstats(file_size, status_codes)
 
-except KeyboardInterrupt:
-    print_stats(file_size, status_dict)
+    printstats(file_size, status_codes)
+
+except (KeyboardInterrupt):
+    printstats(file_size, status_codes)
     raise
