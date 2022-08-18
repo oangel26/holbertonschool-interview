@@ -23,8 +23,12 @@ try:
     for line in sys.stdin:
         counter += 1
         chunk = line.split()
-        status_code = json.loads(chunk[7])
-        file_size += int(chunk[8])
+
+        if len(chunk) > 1:
+            file_size += int(chunk[-1])
+
+        if len(chunk) > 2 and chunk[-2].isnumeric():
+            status_code = chunk[-2]
 
         # Creates status dictionary
         if (status_code in status_dict):
