@@ -8,38 +8,17 @@ def validUTF8(data):
     """ Determines if a given data set represents a valid UTF-8 encoding
     """
     try:
-        for i in data:
-            if i > 255 or i < 0 or type(i) != int:
-                return False
-        return True
+        bytes(data)
     except:
         return False
-
+    return True
 
 if __name__ == "__main__":
     data = [65]
     print(validUTF8(data))
 
-    data = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108]
+    data = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33]
     print(validUTF8(data))
 
-    data = [229, 'a', 65, 127]
-    print(validUTF8(data))
-
-    data = [0, None, 65, 127]
-    print(validUTF8(data))
-
-    data = [229, 2.0, 127]
-    print(validUTF8(data))
-
-    data = [229, True, 127]
-    print(validUTF8(data))
-
-    data = [229, {}, 127]
-    print(validUTF8(data))
-
-    data = [229, [], 127]
-    print(validUTF8(data))
-
-    data = [229, (), 127]
+    data = [229, 65, 127, 256]
     print(validUTF8(data))
