@@ -3,10 +3,9 @@
 Given a pile of coins of different values, determine the fewest number of
 coins needed to meet a given amount total
 """
-from typing import List
 
 
-def makeChange(coins: List[int], total: int) -> int:
+def makeChange(coins: list, total: int) -> int:
     """
     Function that  determine the fewest number of coins needed
     to meet a given amount total.
