@@ -6,7 +6,7 @@ coins needed to meet a given amount total
 from typing import List
 
 
-def makeChange(coins: List, total: int) -> int:
+def makeChange(coins: List[], total: int) -> int:
     """
     Function that  determine the fewest number of coins needed
     to meet a given amount total.
