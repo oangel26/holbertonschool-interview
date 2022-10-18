@@ -15,4 +15,3 @@ def rotate_2d_matrix(matrix):
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
             matrix[j][i] = temp[i][j]
-
