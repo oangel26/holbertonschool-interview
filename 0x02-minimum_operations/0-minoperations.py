@@ -1,41 +1,27 @@
 #!/usr/bin/python3
-"""Minimum Operations"""
+'''
+Given a number n, write a method that calculates
+'''
 
 
-def minOperations(n):
-     """
-     In a text file, there is a single character H. Your text editor can
-     execute only two operations in this file: Copy All and Paste. Given
-     a number n, write a method that calculates the fewest number of
-     operations needed to result in exactly n H characters in the file.
-     """
-     s_file = 'H'
-     num_operation = 1
-     def copy_all(new_file):
-         s_file = new_file
-         num_operation += 1
-         return s_file
+def findIterations(n, result, index):
+    '''
+    returns min operations to get n Hs
+    '''
+    if n % index == 0:
+        n, result = findIterations(n / index, result + index, index)
+    return (n, result)
 
-     def paste(s_file):
-         tmp = s_file
-         s_file = tmp * 2
-         num_operation += 1
-         return s_file
 
-     if (n == 0):
-         return 0
-     elif (n == 1):
-         return num_operation
-     elif (n % 3 == 0):
-         for i in range(int(n/3) - 1):
-             paste(s_file)
-             copy_all(s_file)
-             paste(s_file)
-             paste(s_file)
-     elif (n % 2 == 0):
-         for i in range(int(n/2) - 1):
-             paste(s_file)
-             copy_all(s_file)
-             paste(s_file)
+def minOperations(n, result=0, index=2):
+    '''
+    returns min operations to get n Hs
+    '''
 
-     return num_operation
+    if n < 2 and result == 0:
+        return 0
+
+    while (index < n + 1):
+        n, result = findIterations(n, result, index)
+        index += 1
+    return result
